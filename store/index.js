@@ -1,7 +1,11 @@
 import React from 'react'
 import { createStore } from 'redux'
 import rootReducer from '../reducers'
+import middleware from '../middleware'
 
-export const store = createStore(
-  rootReducer
+const store = createStore(
+  rootReducer,
+  middleware
 )
+
+export default store
