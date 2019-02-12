@@ -1,50 +1,46 @@
 import React from 'react'
-import { StyleSheet, Platform, View, Text } from 'react-native'
-import { createBottomTabNavigator, createMaterialTopTabNavigator, createAppContainer } from 'react-navigation'
-import { FontAwesome } from '@expo/vector-icons'
-import DeckListing from './DeckListing'
-import NewDeck from './NewDeck'
+import { StyleSheet, View, StatusBar, TouchableOpacity, Text } from 'react-native'
+import { createAppContainer, createStackNavigator } from 'react-navigation'
+import DeckView from './DeckView'
+import TabView from './TabView'
+import NewCard from './NewCard'
+import { Ionicons } from '@expo/vector-icons'
+import { withNavigation, NavigationActions } from 'react-navigation'
 
-const tabRouteConfig = {
-  DeckListing: {
-    screen: DeckListing,
+stackRouteConfigs = {
+  TabView: {
+    screen: TabView,
     navigationOptions: {
-      tabBarLabel: 'Listing',
-      tabBarIcon: () => <FontAwesome name='bars' size={30} color='black' />
+      header: null
     }
   },
-  NewDeck: {
-    screen: NewDeck,
+  DeckView: {
+    screen: DeckView,
+    navigationOptions: ({ navigation }) => {
+      return {
+        title: 'Deck',
+        headerRight: (
+          <TouchableOpacity
+            style={{marginRight: 30}}
+            onPress={navigation.getParam('deleteDeck')}
+          >
+            <Ionicons
+              name='md-trash'
+              size={35}
+            />
+          </TouchableOpacity>
+        ),
+      }
+    }
+  },
+  NewCard: {
+    screen: NewCard,
     navigationOptions: {
-      tabBarLabel: 'New Deck',
-      tabBarIcon: () => <FontAwesome name='plus' size={30} color='black' />
+      title: 'Add Card',
     }
   }
 }
 
-const NavigationTabs = (Platform.OS === 'ios')
-                        ? createBottomTabNavigator(tabRouteConfig)
-                        : createMaterialTopTabNavigator(tabRouteConfig)
+Stacks = createStackNavigator(stackRouteConfigs)
 
-//const AppContainer = createAppContainer(NavigationTabs)
-
-export default createAppContainer(NavigationTabs)
-
-/*
-export default class MainView extends React.Component {
-  render() {
-    return (
-      <AppContainer style={styles.container} />
-    )
-  }
-}
-*/
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
+export default createAppContainer(Stacks)

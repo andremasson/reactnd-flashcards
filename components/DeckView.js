@@ -6,6 +6,12 @@ import { withNavigation } from 'react-navigation'
 import { Button } from 'react-native-elements'
 
 class DeckView extends React.Component {
+  componentDidMount() {
+    this.props.navigation.setParams({ deleteDeck: this.deleteDeck });
+  }
+  deleteDeck = () => {
+    console.log('DELETAR!')
+  }
   addCard = () => {
     const {deck, navigation} = this.props
     navigation.navigate('NewCard', {deck: deck})
@@ -50,7 +56,7 @@ class DeckView extends React.Component {
 
 const mapStateToProps = ({decks}, {navigation}) => {
   const deck = (navigation.getParam('title')) 
-    ? decks.filter(item => item.title === navigation.getParam('title'))
+    ? decks.find(item => item.title === navigation.getParam('title'))
     : decks[decks.length - 1] 
   return {
     deck

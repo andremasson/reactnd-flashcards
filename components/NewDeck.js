@@ -16,7 +16,7 @@ class NewDeck extends React.Component {
       this.setState({ errorMessage: "Title can't be empty" })
       return
     }
-    if (decks.filter(item => item.title.toUpperCase() === this.state.deckName.toUpperCase()).length > 0) {
+    if (decks.find(item => item.title.toUpperCase() === this.state.deckName.toUpperCase()) !== undefined) {
       this.setState({ errorMessage: "There's a deck with this name already" })
       return
     }
