@@ -1,7 +1,8 @@
 import {
   GET_DECKS,
   ADD_DECK_TITLE,
-  ADD_CARD_TO_DECK
+  ADD_CARD_TO_DECK,
+  DELETE_DECK
 } from '../actions/decks'
 
 export default function decks (state = [], action) {
@@ -30,6 +31,8 @@ export default function decks (state = [], action) {
           return {...item}
         }
       })
+    case DELETE_DECK:
+      return state.filter(item => item.title !== action.title)
     default:
       return state
   }

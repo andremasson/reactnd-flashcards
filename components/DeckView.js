@@ -1,16 +1,35 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { pluralize } from '../utils/pluralize'
 import { withNavigation } from 'react-navigation'
 import { Button } from 'react-native-elements'
+import { deleteDeck } from '../actions/decks'
 
 class DeckView extends React.Component {
   componentDidMount() {
     this.props.navigation.setParams({ deleteDeck: this.deleteDeck });
   }
+  confirmDeleteDeck = () => {
+    const {deck, navigation} = this.props
+    this.props.deleteDeck(deck.title)
+    navigation.navigate('DeckListing')
+  }
   deleteDeck = () => {
-    console.log('DELETAR!')
+    const {deck} = this.props
+    Alert.alert(
+      'Confirm',
+      `Delete '${deck.title}'?`,
+      [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Delete',
+          onPress: this.confirmDeleteDeck
+        },
+      ],
+    )
   }
   addCard = () => {
     const {deck, navigation} = this.props
@@ -21,6 +40,7 @@ class DeckView extends React.Component {
   }
   render() {
     const {deck} = this.props
+    if (deck === undefined) return <View></View>
     return (
       <View style={styles.container}>
         <View style={styles.innerContainer}>
@@ -63,9 +83,11 @@ const mapStateToProps = ({decks}, {navigation}) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  
-})
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteDeck: title => dispatch(deleteDeck(title)),
+  }
+}
 
 export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(DeckView))
 
