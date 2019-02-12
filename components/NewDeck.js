@@ -11,12 +11,18 @@ class NewDeck extends React.Component {
     errorMessage: ''
   }
   onPressButton = () => {
+    const {decks} = this.props
     if (this.state.deckName.length === 0) {
       this.setState({ errorMessage: "Title can't be empty" })
       return
     }
+    if (decks.filter(item => item.title.toUpperCase() === this.state.deckName.toUpperCase()).length > 0) {
+      this.setState({ errorMessage: "There's a deck with this name already" })
+      return
+    }
     this.props.handleAddDeckTitle(this.state.deckName)
     this.setState({ deckName: '' })
+    this.props.navigation.navigate('DeckListing')
     this.props.navigation.navigate('DeckView')
   }
   onChangeText = (text) => {
@@ -49,6 +55,12 @@ class NewDeck extends React.Component {
   }
 }
 
+const mapStateToProps = ({decks}) => {
+  return {
+    decks
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     handleAddDeckTitle: title => dispatch(handleAddDeckTitle(title)),
@@ -56,13 +68,12 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(withNavigation(NewDeck))
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(NewDeck))
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    //flexDirection: 'row',
     justifyContent: 'center'
   },
   title: {

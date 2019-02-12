@@ -4,14 +4,13 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  ToastAndroid
 } from 'react-native'
 import { pluralize } from '../utils/pluralize'
 import { withNavigation } from 'react-navigation'
 
 const DeckListingItem = ({deck, navigation}) => {
   const onPress = () => {
-    navigation.push( 'DeckView', {deck: deck})
+    navigation.push('DeckView', {title: deck.title})
   }
   return (
     <View>

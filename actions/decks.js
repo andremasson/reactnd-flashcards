@@ -4,6 +4,7 @@ import {
 
 export const GET_DECKS = 'GET_DECKS'
 export const ADD_DECK_TITLE = 'ADD_DECK_TITLE'
+export const ADD_CARD_TO_DECK = 'ADD_CARD_TO_DECK'
 
 export const getDecks = (decks) => ({ type: GET_DECKS, decks })
 
@@ -21,10 +22,4 @@ export const handleAddDeckTitle = title => {
   return (dispatch) => dispatch(addDeckTitle(title))
 }
 
-export function handleNewPost (post) {
-  return (dispatch) =>
-    saveNewPost(post)
-      .then((post) => {
-        return dispatch(newPost(post))
-      })
-}
+export const addCardToDeck = (title, card) => ({ type: ADD_CARD_TO_DECK, title, card })
