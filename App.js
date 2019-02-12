@@ -1,13 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Platform, StatusBar } from 'react-native'
+import { StyleSheet, View, StatusBar } from 'react-native'
 import { Provider } from 'react-redux'
-import { createBottomTabNavigator, createMaterialTopTabNavigator, createAppContainer } from 'react-navigation'
-import { FontAwesome } from '@expo/vector-icons'
+import { createAppContainer, createStackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
 import { blue } from './utils/colors'
 import store from './store'
-import DeckListing from './components/DeckListing'
-import NewDeck from './components/NewDeck'
+import DeckView from './components/DeckView'
+import MainView from './components/MainView'
 
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -17,28 +16,24 @@ function AppStatusBar ({ backgroundColor, ...props }) {
   )
 }
 
-const routeConfig = {
-  DeckListing: {
-    screen: DeckListing,
+const stackRouteConfigs = {
+  MainView: {
+    screen: MainView,
     navigationOptions: {
-      tabBarLabel: 'Listing',
-      tabBarIcon: () => <FontAwesome name='bars' size={30} color='black' />
+      header: null
     }
   },
-  NewDeck: {
-    screen: NewDeck,
+  DeckView: {
+    screen: DeckView,
     navigationOptions: {
-      tabBarLabel: 'New Deck',
-      tabBarIcon: () => <FontAwesome name='plus' size={30} color='black' />
+      title: 'Deck',
     }
-  }
+  },
 }
 
-const NavigationTabs = (Platform.OS === 'ios')
-                        ? createBottomTabNavigator(routeConfig)
-                        : createMaterialTopTabNavigator(routeConfig)
+const Stacks = createStackNavigator(stackRouteConfigs)
 
-const AppContainer = createAppContainer(NavigationTabs)
+const AppContainer = createAppContainer(Stacks)
 
 export default class App extends React.Component {
   render() {

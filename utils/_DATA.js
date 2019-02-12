@@ -1,5 +1,5 @@
-const _stockData = {
-  React: {
+const _stockData = new Array(
+  {
     title: 'React',
     questions: [
       {
@@ -12,7 +12,7 @@ const _stockData = {
       }
     ]
   },
-  JavaScript: {
+  {
     title: 'JavaScript',
     questions: [
       {
@@ -21,7 +21,7 @@ const _stockData = {
       }
     ]
   }
-}
+)
 
 export const stockData = () => {
   return new Promise((res, rej) => {

@@ -1,7 +1,9 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { getStockData } from '../actions/decks'
+import DeckListingItem from './DeckListingItem'
+import { Divider } from 'react-native-elements'
 
 class DeckListing extends React.Component {
   componentDidMount() {
@@ -10,9 +12,14 @@ class DeckListing extends React.Component {
   render() {
     const { decks } = this.props
     return (
-      <View>
-        <Text>Lista de decks</Text>
-      </View>
+      <ScrollView>
+        {decks && decks.map((deck, index) =>
+          <View key={index}>
+            <DeckListingItem deck={deck} />
+            <Divider />
+          </View>
+        )}
+      </ScrollView>
     )
   }
 }
