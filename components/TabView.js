@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Platform, View, Text } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { createBottomTabNavigator, createMaterialTopTabNavigator, createAppContainer } from 'react-navigation'
 import { FontAwesome } from '@expo/vector-icons'
 import DeckListing from './DeckListing'

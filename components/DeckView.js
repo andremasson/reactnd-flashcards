@@ -36,7 +36,8 @@ class DeckView extends React.Component {
     navigation.navigate('NewCard', {deck: deck})
   }
   startQuiz = () => {
-    
+    const {deck, navigation} = this.props
+    navigation.navigate('QuizView', {title: deck.title})
   }
   render() {
     const {deck} = this.props

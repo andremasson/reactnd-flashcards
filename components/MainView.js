@@ -1,11 +1,11 @@
 import React from 'react'
-import { StyleSheet, View, StatusBar, TouchableOpacity, Text } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import { createAppContainer, createStackNavigator } from 'react-navigation'
 import DeckView from './DeckView'
 import TabView from './TabView'
 import NewCard from './NewCard'
+import QuizView from './QuizView'
 import { Ionicons } from '@expo/vector-icons'
-import { withNavigation, NavigationActions } from 'react-navigation'
 
 stackRouteConfigs = {
   TabView: {
@@ -37,6 +37,12 @@ stackRouteConfigs = {
     screen: NewCard,
     navigationOptions: {
       title: 'Add Card',
+    }
+  },
+  QuizView: {
+    screen: QuizView,
+    navigationOptions: {
+      title: 'Quiz',
     }
   }
 }
