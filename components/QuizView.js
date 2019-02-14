@@ -4,6 +4,10 @@ import { connect } from 'react-redux'
 import { pluralize } from '../utils/pluralize'
 import { withNavigation } from 'react-navigation'
 import { Button } from 'react-native-elements'
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/helpers'
 
 class QuizView extends React.Component {
   state = {
@@ -70,6 +74,8 @@ class QuizView extends React.Component {
     )
   }
   resultView = () => {
+    clearLocalNotification()
+      .then(setLocalNotification)
     return (
       <View style={styles.container}>
         <View>
