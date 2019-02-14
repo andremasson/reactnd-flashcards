@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, KeyboardAvoidingView, ToastAndroid, AlertIOS, Platform } from 'react-native'
 import { Input, Button } from 'react-native-elements'
-import { addCardToDeck } from '../actions/decks'
+import { handleAddCardToDeck } from '../actions/decks'
 import { withNavigation } from 'react-navigation'
 
 class NewCard extends React.Component {
@@ -23,7 +23,7 @@ class NewCard extends React.Component {
       hasError = true
     }
     if (hasError) return
-    this.props.addCardToDeck(this.props.deck.title, { question: this.state.question, answer: this.state.answer })
+    this.props.handleAddCardToDeck(this.props.deck.title, { question: this.state.question, answer: this.state.answer })
     this.setState({ question: '', answer: '' })
     if (Platform.OS === 'ios') {
       AlertIOS.alert('Card added!')
@@ -77,7 +77,7 @@ const mapStateToProps = ({}, {navigation}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCardToDeck: (title, card) => dispatch(addCardToDeck(title, card))
+    handleAddCardToDeck: (title, card) => dispatch(handleAddCardToDeck(title, card))
   }
 }
 

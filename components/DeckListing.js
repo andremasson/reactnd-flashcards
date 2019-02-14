@@ -1,13 +1,13 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import { getStockData } from '../actions/decks'
+import { getInitialData } from '../actions/decks'
 import DeckListingItem from './DeckListingItem'
 import { Divider } from 'react-native-elements'
 
 class DeckListing extends React.Component {
   componentDidMount() {
-    this.props.getStockData()
+    this.props.getInitialData()
   }
   render() {
     const { decks } = this.props
@@ -31,7 +31,7 @@ const mapStateToProps = ({decks}) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getStockData: () => dispatch(getStockData())
+  getInitialData: () => dispatch(getInitialData())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckListing)

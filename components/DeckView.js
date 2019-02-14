@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { pluralize } from '../utils/pluralize'
 import { withNavigation } from 'react-navigation'
 import { Button } from 'react-native-elements'
-import { deleteDeck } from '../actions/decks'
+import { handleDeleteDeck } from '../actions/decks'
 
 class DeckView extends React.Component {
   componentDidMount() {
@@ -12,7 +12,7 @@ class DeckView extends React.Component {
   }
   confirmDeleteDeck = () => {
     const {deck, navigation} = this.props
-    this.props.deleteDeck(deck.title)
+    this.props.handleDeleteDeck(deck.title)
     navigation.navigate('DeckListing')
   }
   deleteDeck = () => {
@@ -86,7 +86,7 @@ const mapStateToProps = ({decks}, {navigation}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteDeck: title => dispatch(deleteDeck(title)),
+    handleDeleteDeck: title => dispatch(handleDeleteDeck(title)),
   }
 }
 
