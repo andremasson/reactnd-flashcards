@@ -1,23 +1,27 @@
+/**
+ * @description Dados padrão para primeiro uso do App
+ */
+
 const _stockData = new Array(
   {
-    title: 'React',
+    title: 'Stock Data',
     questions: [
       {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
+        question: 'Estes dados já estavam aqui?',
+        answer: 'Sim'
       },
       {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
+        question: 'Como eles foram carregados?',
+        answer: 'O AsyncStorage tentou encontrar os dados salvos. Quando não encontrado, estes dados são carregados.'
       }
     ]
   },
   {
-    title: 'JavaScript',
+    title: 'Deletar Dados',
     questions: [
       {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+        question: 'Esses decks podem ser deletados?',
+        answer: 'Sim.'
       }
     ]
   }

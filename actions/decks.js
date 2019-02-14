@@ -25,6 +25,9 @@ export function getStockData() {
   }
 }
 
+/**
+ * @description Busca os dados salvos. No primeiro uso, são carregados dados padrão. 
+ */
 export function getInitialData() {
   return (dispatch) => fetchDecks()
     .then(result => {
