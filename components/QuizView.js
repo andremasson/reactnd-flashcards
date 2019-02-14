@@ -72,9 +72,27 @@ class QuizView extends React.Component {
   resultView = () => {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>
-          You've got {pluralize({ singular: 'card', count: this.state.correctCount })} correct out of {this.state.questions.length}
-        </Text>
+        <View>
+          <View style={styles.innerContainer}>
+            <Text style={styles.title}>
+            You've got {pluralize({ singular: 'card', count: this.state.correctCount })} correct out of {this.state.questions.length}
+            </Text>
+          </View>
+          <View style={styles.innerContainer}>
+            <Button
+              onPress={this.finish}
+              title='Finish'
+              containerStyle={styles.buttonContainer}
+              titleStyle={styles.buttonTitle}
+            />
+            <Button
+              onPress={this.tryAgain}
+              title='Try Again'
+              containerStyle={styles.buttonContainer}
+              titleStyle={styles.buttonTitle}
+            />
+          </View>
+        </View>
       </View>
     )
   }
@@ -99,6 +117,16 @@ class QuizView extends React.Component {
       currentQuestion: currentQuestion + 1,
       showAnswer: false
     })
+  }
+  tryAgain = () => {
+    this.setState({
+      correctCount: 0,
+      currentQuestion: 0,
+      showAnswer: false
+    })
+  }
+  finish = () => {
+    this.props.navigation.goBack()
   }
   render() {
     const { showAnswer, currentQuestion, questions } = this.state

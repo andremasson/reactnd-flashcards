@@ -5,7 +5,7 @@ const DAILY_STORAGE_KEY = 'FlashcardsARM:daily'
 
 export function clearLocalNotification() {
   return AsyncStorage.removeItem(DAILY_STORAGE_KEY)
-    .then(Notifications.cancelAllScheduledNotificationsAsync)
+    .then(Notifications.cancelAllScheduledNotificationsAsync())
 }
 
 function createNotification () {
